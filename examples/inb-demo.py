@@ -43,7 +43,7 @@ obs_distns=[d.AutoRegression(
     K_0=np.eye(4+affine), affine=affine) for state in range(Nmax)]
 
 dur_distns=[NegativeBinomialIntegerR2Duration(
-    r_discrete_distn=np.ones(10.),alpha_0=1.,beta_0=1.) for state in range(Nmax)]
+    r_discrete_distn=np.ones(10),alpha_0=1.,beta_0=1.) for state in range(Nmax)]
 
 model = m.ARWeakLimitHDPHSMMIntNegBin(
         alpha=4.,gamma=4.,init_state_concentration=10.,
@@ -67,5 +67,5 @@ plt.figure()
 colors = ['b','r','y','k','g']
 stateseq = model.states_list[0].stateseq
 for i,s in enumerate(np.unique(stateseq)):
-    plt.plot(data[s==stateseq,0],data[s==stateseq,1],colors[i % len(colors)] + 'o')
+    plt.plot(data[np.nonzero(s==stateseq),0],data[np.nonzero(s==stateseq),1],colors[i % len(colors)] + 'o')
 
