@@ -188,6 +188,16 @@ class ARWeakLimitHDPHSMMIntNegBinSeparateTrans(_ARMixin,pyhsmm.models.WeakLimitH
     pass
 
 
+# Added by BC Cho
+class ARWeakLimitStickyHDPHMM(_ARMixin,pyhsmm.models.WeakLimitStickyHDPHMM):
+    pass
+
+
+# Added by BC Cho
+class ARWeakLimitStickyHDPHMMSeparateTrans(_SeparateTransMixin,ARWeakLimitStickyHDPHMM):
+    _states_class = pyhsmm.internals.hmm_states.HMMStatesEigenSeparateTrans
+
+
 class ARWeakLimitHDPHSMMDelayedIntNegBin(
         _ARMixin,
         pyhsmm.models.WeakLimitHDPHSMMDelayedIntNegBin):
