@@ -2,6 +2,7 @@ from distutils.core import setup
 from setuptools.command.build_ext import build_ext as _build_ext
 from Cython.Build import cythonize
 import numpy as np
+import sys
 from os.path import dirname, join, exists
 from os import mkdir
 from shutil import move
@@ -26,6 +27,12 @@ if not exists(eigenpath):
     move(join(thedir, 'Eigen'), eigenpath)
     print('...done!')
 
+if '--no-compile' in sys.argv:
+    ext_modules = []
+    sys.argv.remove('--no-compile')
+else:
+    ext_modules = cythonize('**/*.pyx')
+
 setup(
     name='autoregressive',
     version='0.1.1',
@@ -45,6 +52,6 @@ setup(
         'Intended Audience :: Science/Research',
         'Programming Language :: Python',
         'Programming Language :: C++'],
-    ext_modules=cythonize('**/*.pyx'),
+    ext_modules=ext_modules,
     include_dirs=[np.get_include(), 'deps']
 )
