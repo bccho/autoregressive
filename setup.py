@@ -1,6 +1,7 @@
-from distutils.core import setup
+from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 from Cython.Build import cythonize
+
 import numpy as np
 import sys
 from os.path import dirname, join, exists
@@ -31,7 +32,14 @@ if '--no-compile' in sys.argv:
     ext_modules = []
     sys.argv.remove('--no-compile')
 else:
-    ext_modules = cythonize('**/*.pyx')
+    print('Setting up with compilation...')
+    ext_modules = [
+            Extension('autoregressive.messages', ['autoregressive/messages.pyx'],
+                language='c++',
+                extra_compile_args=['-O2', '-fopenmp', '-std=c++11', '-DEIGEN_NO_MALLOC', '-DNDEBUG', '-w'],
+                extra_link_args=['-fopenmp'])
+            ]
+    # ext_modules = cythonize('**/*.pyx')
 
 setup(
     name='autoregressive',
