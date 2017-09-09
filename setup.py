@@ -1,6 +1,6 @@
 from setuptools import setup, Extension
-from setuptools.command.build_ext import build_ext as _build_ext
-from Cython.Build import cythonize
+# from setuptools.command.build_ext import build_ext as _build_ext
+# from Cython.Build import cythonize
 
 import numpy as np
 import sys
