@@ -43,7 +43,7 @@ else:
 
 setup(
     name='autoregressive',
-    version='0.1.1',
+    version='0.1.1bc',
     description='Extension for switching vector autoregressive models with pyhsmm',
     author='Matthew James Johnson',
     author_email='mattjj@csail.mit.edu',
